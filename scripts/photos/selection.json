@@ -1,0 +1,23 @@
+{
+  "hero":                  { "from": "raw" },
+  "charts-publications":   { "from": "raw" },
+  "deck-stores":           { "from": "raw" },
+  "fabrication-welding":   { "from": "raw" },
+  "motor-rewinding":       { "from": "raw" },
+  "riding-squads":         { "from": "raw" },
+
+  "discipline-supplies":   { "from": "cand", "pick": "03" },
+  "discipline-services":   { "from": "cand", "pick": "01" },
+  "provisions":            { "from": "cand", "pick": "02" },
+  "bonded-stores":         { "from": "cand", "pick": "05" },
+  "engine-stores":         { "from": "cand", "pick": "03" },
+  "cabin-stores":          { "from": "cand", "pick": "04" },
+  "safety-equipment":      { "from": "cand", "pick": "01" },
+  "lubricants-chemicals":  { "from": "cand", "pick": "03" },
+  "marine-paints":         { "from": "cand", "pick": "08" },
+  "electrical-stores":     { "from": "cand", "pick": "01" },
+  "medical-supplies":      { "from": "cand", "pick": "04" },
+  "ship-repair":           { "from": "cand", "pick": "03" },
+  "spares-procurement":    { "from": "cand", "pick": "02" },
+  "mechanical-electrical": { "from": "cand", "pick": "01", "position": "centre" }
+}

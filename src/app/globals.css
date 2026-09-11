@@ -1,26 +1,251 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ============================================================================
+   MISHK OVERSEAS — DESIGN TOKENS
+   Deep Navy + Brass. Dark-first. See IMPLEMENTATION.md §2.
+   ========================================================================== */
+
+@theme {
+  /* --- Navy family: the deep-water base ----------------------------------- */
+  --color-navy-900: #0a1b2a; /* page ground */
+  --color-navy-800: #0f2438; /* raised panels, cards, nav */
+  --color-navy-700: #16324b; /* card hover, inset wells */
+  --color-navy-600: #1f4460; /* borders on dark, dividers */
+
+  /* --- Brass: the accent. Punctuation, never paragraph. -------------------- */
+  --color-brass-500: #c9a227; /* CTAs, rules, active states, numerals */
+  --color-brass-400: #dcbb4b; /* hover / lighter fill */
+  --color-brass-100: #f5e9c0; /* tint on dark, subtle badges */
+  --color-brass-700: #7a5f0f; /* text-safe brass ON PAPER — 5.75:1 */
+
+  /* --- Cream & slate: text on navy ---------------------------------------- */
+  --color-cream-50: #f2ede3; /* primary text on navy */
+  --color-cream-200: #d9d2c4; /* secondary text on navy */
+  --color-slate-400: #8a99a8; /* muted / meta / captions */
+
+  /* --- Signal colours ------------------------------------------------------
+     -500 are UI/fill/border tones (3:1 on navy — never body copy).
+     -300 are the text-safe variants for copy on navy.                        */
+  --color-teal-500: #2e7d8f; /* in stock, port active, info — fills & borders */
+  --color-teal-300: #57afc2; /* text-safe teal ON NAVY — 6.91:1 */
+  --color-rust-500: #b4552f; /* warning, urgent, 24x7 — fills & borders */
+  --color-rust-300: #d97a4e; /* text-safe rust ON NAVY — 5.69:1 */
+
+  /* --- Light sections ------------------------------------------------------ */
+  --color-paper-50: #fbf9f5; /* light-section ground */
+  --color-ink-900: #0a1b2a; /* text on light (same navy, reused) */
+
+  /* --- Typography ---------------------------------------------------------- */
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, "SF Mono", monospace;
+
+  /* --- Radius: tight. Sharp corners read as engineering. -------------------
+     Named explicitly — Tailwind's bare `rounded` is NOT token-driven in v4,
+     so every surface uses an explicit step.                                   */
+  --radius-none: 0px;
+  --radius-sm: 2px; /* buttons, chips, badges */
+  --radius-md: 4px; /* cards, inputs, panels */
+  --radius-lg: 6px; /* images, hero media */
+
+  /* --- Motion -------------------------------------------------------------- */
+  --ease-marine: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* --- Container ----------------------------------------------------------- */
+  --container-site: 1280px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ============================================================================
+   BASE LAYER
+   ========================================================================== */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-navy-900);
+    color: var(--color-cream-50);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Display type: Fraunces, optical size pushed high for the heritage feel. */
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    font-variation-settings: "SOFT" 0, "WONK" 0, "opsz" 48;
+  }
+
+  /* Visible focus on every interactive element. Non-negotiable. */
+  :focus-visible {
+    outline: 2px solid var(--color-brass-500);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background-color: var(--color-brass-500);
+    color: var(--color-navy-900);
+  }
+
+  /* Mono numerals should line up in tables. */
+  .font-mono {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ============================================================================
+   MOTIF UTILITIES
+   Small, reusable pieces of the maritime visual language. See §2.4.
+   ========================================================================== */
+
+@layer utilities {
+  /* Eyebrow / label — always brass or teal, never cream. */
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+
+  /* Nautical-chart grid texture: 48px, 3% opacity, fading out downward. */
+  .chart-grid {
+    background-image:
+      linear-gradient(to right, rgba(242, 237, 227, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(242, 237, 227, 0.03) 1px, transparent 1px);
+    background-size: 48px 48px;
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 85%);
+    mask-image: linear-gradient(to bottom, black 0%, transparent 85%);
+  }
+
+  /* Measure cap for body copy. */
+  .measure {
+    max-width: 68ch;
+  }
+}
+
+/* ============================================================================
+   REDUCED MOTION
+   All entrance motion collapses to instant. Non-negotiable. See §2.5.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================================================
+   KEYFRAMES
+   ========================================================================== */
+
+@keyframes marine-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================================
+   REVEAL — section entrance, driven by <Reveal>'s data-shown attribute.
+   ========================================================================== */
+
+@layer utilities {
+  .reveal {
+    opacity: 0;
+  }
+
+  .reveal[data-shown] {
+    animation: marine-in 600ms var(--ease-marine) both;
+  }
+
+  /* Nothing to reveal if the user asked for no motion — just show it. */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal,
+    .reveal[data-shown] {
+      opacity: 1;
+      animation: none;
+    }
+  }
+}
+
+/* ============================================================================
+   PRINT
+   The site is dark-first; printing that would waste a cartridge and read
+   badly. Force a paper document instead. Used by /supplies/catalogue.
+   ========================================================================== */
+
+@media print {
+  :root {
+    color-scheme: light;
+  }
+
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  /* Site chrome has no place in a printed document. */
+  header[class*="sticky"],
+  footer,
+  nav[aria-label="Breadcrumb"],
+  section[aria-label="Supply desk contact"] {
+    display: none !important;
+  }
+
+  .reveal,
+  .reveal[data-shown] {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+
+  .chart-grid {
+    display: none !important;
+  }
+
+  a[href]::after {
+    content: "";
+  }
+
+  table {
+    page-break-inside: auto;
+  }
+
+  tr {
+    page-break-inside: avoid;
+  }
+
+  thead {
+    display: table-header-group;
+  }
+
+  @page {
+    margin: 16mm;
+  }
 }

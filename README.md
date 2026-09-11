@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mishk Overseas
 
-## Getting Started
+Ship chandling and marine technical services. Next.js 15 · TypeScript · Tailwind CSS v4.
 
-First, run the development server:
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **`/`** — placeholder homepage (real build is phase 2)
+- **`/styleguide`** — the design system, rendered live. Start here.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command | What it does |
+|---|---|
+| `npm run dev` | Dev server on :3000 |
+| `npm run build` | Production build |
+| `npm run lint` | ESLint |
+| `npm run contrast` | WCAG audit of the palette — **run after any colour change** |
+| `npm run test:forms` | Validation and rate-limit checks for the quote/contact forms |
+| `npm run audit:a11y` | axe-core audit over 15 routes (needs a running server) |
+| `npm run perf` | Gzipped payload budget (needs `npm run start`) |
 
-## Learn More
+## Environment
 
-To learn more about Next.js, take a look at the following resources:
+Copy `.env.example` to `.env.local`. **The quote and contact forms cannot send
+until `RESEND_API_KEY` and `MAIL_TO` are set** — until then both pages show a
+visible "not connected" warning and every submission returns an explicit
+failure with the phone/email fallback. They never fake success.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+See [`DEPLOY.md`](./DEPLOY.md). Outstanding content is tracked in
+[`ASSETS.md`](./ASSETS.md).
 
-## Deploy on Vercel
+## Design system
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Deep Navy + Brass, dark-first. Full specification in [`IMPLEMENTATION.md`](./IMPLEMENTATION.md):
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- §2.1 colour tokens · §2.2 typography · §2.4 the eight marine motifs · §2.7 measured contrast
+- Tokens are defined once in `src/app/globals.css` under `@theme` and consumed as Tailwind utilities. Never hard-code a hex outside that block.
+
+### Structure
+
+```
+src/
+  app/styleguide/     the living design system
+  components/marine/  the eight maritime motifs
+  components/ui/      button, badge, card, input — retokenised primitives
+  components/layout/  container
+  hooks/              use-count-up
+  lib/utils.ts        cn()
+scripts/contrast.mjs  palette accessibility audit
+```
+
+## Colour rules worth knowing before you write CSS
+
+- `teal-500` / `rust-500` are **fills, borders and dots only** — 3.7:1 and 3.6:1 on navy. Use `teal-300` / `rust-300` for text.
+- `brass-500` **must never be text on a paper section** — 2.30:1. Use `brass-700`.
+- Bare Tailwind `rounded` is not token-driven in v4. Always use `rounded-sm` / `rounded-md` / `rounded-lg`.
+
+## Photography
+
+20 licensed images from Wikimedia Commons live in `public/img/` (AVIF + WebP,
+two widths each). The manifest is **generated** — edit
+`scripts/photos/selection.json`, not `src/data/photos.ts`, then run:
+
+```bash
+node scripts/photos/build.mjs
+```
+
+**`/credits` is a licence condition.** Several images are CC BY / CC BY-SA,
+which require attribution. Do not delete that page or unlink it from the footer.
+
+These are illustrative stock images, not photographs of the company's own
+premises or staff, and must never be captioned as though they were.
+
+## Two traps worth knowing
+
+- **Do not import from `src/lib/validation.ts` in a client component.** It
+  imports zod at module scope; a constant pulled from there ships ~390 KB of
+  zod to the browser. Use `src/lib/form-constants.ts` instead.
+- **OG cards need static font files.** Satori cannot parse the variable
+  Fraunces the site uses, so `src/assets/fonts/` holds static cuts used only
+  at build time.
+- **`sharp`'s `position: "attention"` crop occasionally lands on a blurred
+  foreground.** Set `"position": "centre"` for that slot in
+  `scripts/photos/selection.json` and rebuild. Always check the result —
+  `node scripts/photos/sheet.mjs <dir> <out.jpg>` makes a contact sheet.
