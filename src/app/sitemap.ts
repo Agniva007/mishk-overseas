@@ -1,7 +1,8 @@
 import type { MetadataRoute } from "next";
 import { site } from "@/data/site";
 import { supplies } from "@/data/supplies";
-import { services } from "@/data/site";
+import { spares } from "@/data/spares";
+import { serviceDetails } from "@/data/services";
 import { ports } from "@/data/ports";
 
 /**
@@ -17,6 +18,7 @@ import { ports } from "@/data/ports";
 const BUILT = {
   home: true,
   supplies: true, // phase 3
+  spares: true, // marine spares — split out from services
   services: true, // phase 4
   ports: true, // phase 4
   quote: true, // phase 5
@@ -41,9 +43,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     routes.push(...supplies.map((c) => entry(`/supplies/${c.slug}`, 0.8)));
   }
 
+  if (BUILT.spares) {
+    routes.push(entry("/spares", 0.9));
+    routes.push(...spares.map((c) => entry(`/spares/${c.slug}`, 0.8)));
+  }
+
   if (BUILT.services) {
     routes.push(entry("/services", 0.9));
-    routes.push(...services.map((s) => entry(s.href, 0.7)));
+    routes.push(...serviceDetails.map((s) => entry(`/services/${s.slug}`, 0.7)));
   }
 
   if (BUILT.ports) {

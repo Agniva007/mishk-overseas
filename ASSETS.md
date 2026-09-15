@@ -110,7 +110,7 @@ when the stock image they describe is gone.
 - Client logos + written permission to display
 - Principal / brand partner logos + permission
 
-## 7. Catalogue — 🟨 STRUCTURE BUILT, CODES OUTSTANDING
+## 7. Stores catalogue — 🟨 STRUCTURE BUILT, CODES OUTSTANDING
 
 `src/data/supplies.ts` holds 11 categories and 198 published lines with item
 names and units of issue. Item names are generic marine goods and are safe to
@@ -133,6 +133,31 @@ publish as they stand.
 
 Also confirm: which lines the company genuinely holds in stock vs. indents, and
 whether any listed line should be removed.
+
+## 7b. Spares catalogue — 🟨 STRUCTURE BUILT, VERIFICATION OUTSTANDING
+
+`src/data/spares.ts` holds **15 equipment categories, 187 lines and 101 named
+makes**. Assembly names are generic marine equipment terms and are safe to
+publish.
+
+**What the client must confirm:**
+
+| Item | Why |
+|---|---|
+| **The maker list** | 101 makes are listed as "makes we source for". Confirm the company genuinely can source each, and add any it is known for. Remove any it cannot. |
+| **Availability** | Every ex-stock / on-indent / on-request flag is illustrative. |
+| **Exchange units** | Several categories offer parts "on exchange against a core". Confirm that is really offered. |
+| **Category coverage** | Whether all 15 equipment categories are genuinely served. |
+
+> **No maker part numbers are published, deliberately** — a number is
+> meaningless without its nameplate and a wrong one is something a purchaser
+> would order against. The tables name assemblies only. Do not add part numbers
+> without a verified source.
+
+> **The independent-trader wording on `/spares` is a legal statement**, not
+> marketing copy: listing a manufacturer means we source parts for that
+> equipment, not that we are an authorised distributor, agent or licensee. Do
+> not soften or remove it.
 
 ## 8. Testimonials — ⬜
 
@@ -189,8 +214,8 @@ added in `logUndeliverable()`. Logs are not durable.
 
 ## 10. Service capability detail — ⬜ BLOCKING for /services pages
 
-`src/data/services.ts` has six service lines with descriptions, capability
-lists and scope boundaries. Two fields are deliberately empty:
+`src/data/services.ts` has **22 service lines in 5 groups** with descriptions,
+capability lists and scope boundaries. Two fields are deliberately empty:
 
 | Field | Why it is empty |
 |---|---|
@@ -199,7 +224,7 @@ lists and scope boundaries. Two fields are deliberately empty:
 
 Both render as visible "Pending client detail" panels on the live pages.
 
-**Also requires sign-off:** `scope.included` and `scope.excluded` on all six
+**Also requires sign-off:** `scope.included` and `scope.excluded` on all 22
 services are drafted to industry norms, but they are a **commercial
 commitment** — what the company will and will not do for the quoted price. The
 client must review every line before launch. Each page currently says so on its
@@ -258,6 +283,7 @@ Run `grep -rn "PLACEHOLDER" src/` to find them.
 | `src/data/ports.ts` | Port coverage, active status, lead times (coordinates are real) |
 | `src/data/home.ts` | Client names, testimonials, certification claims |
 | `src/data/services.ts` | Equipment specs, case notes (both empty); scope wording needs sign-off |
+| `src/data/spares.ts` | Maker list, availability flags, exchange-basis claims |
 | `.env.example` | `RESEND_API_KEY`, `MAIL_FROM`, `MAIL_TO` — forms cannot send until these are set |
 | `src/components/layout/legal-page.tsx` | The "not legally reviewed" draft banner |
 | `src/components/media/photo-placeholder.tsx` | Every image on the site — renders a visible "Photo pending" tag |

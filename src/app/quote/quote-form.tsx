@@ -5,7 +5,7 @@ import { Input, Textarea, Label } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { PlimsollBullet } from "@/components/marine/plimsoll-bullet";
 import { MAX_UPLOAD_BYTES, formatBytes } from "@/lib/form-constants";
-import { supplyCategories } from "@/data/site";
+import { sparesCategories, supplyCategories } from "@/data/site";
 import { ports } from "@/data/ports";
 import { site } from "@/data/site";
 import { initialQuoteState, submitQuote } from "./actions";
@@ -151,27 +151,38 @@ export function QuoteForm() {
         <legend className="eyebrow mb-5 text-brass-500">Requirement</legend>
 
         <p className="mb-3 text-sm text-slate-400">
-          Select any categories that apply — or skip this and attach your
+          Select anything that applies — or skip this and attach your
           requisition below.
         </p>
-        <div className="mb-6 flex flex-wrap gap-2">
+
+        <p className="eyebrow mb-2 text-slate-400">Stores</p>
+        <div className="mb-5 flex flex-wrap gap-2">
           {supplyCategories.map((c) => (
-            <label
-              key={c.href}
-              className="group cursor-pointer select-none"
-            >
-              <input
-                type="checkbox"
-                name="categories"
-                value={c.label}
-                className="peer sr-only"
-              />
+            <label key={c.href} className="group cursor-pointer select-none">
+              <input type="checkbox" name="categories" value={c.label} className="peer sr-only" />
               <span className="inline-flex items-center rounded-sm border border-navy-600 px-3 py-1.5 text-xs text-cream-200 transition-colors hover:border-brass-500/60 peer-checked:border-brass-500 peer-checked:bg-brass-500/12 peer-checked:text-brass-400 peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-brass-500">
                 {c.label}
               </span>
             </label>
           ))}
         </div>
+
+        <p className="eyebrow mb-2 text-slate-400">Spares</p>
+        <div className="mb-3 flex flex-wrap gap-2">
+          {sparesCategories.map((c) => (
+            <label key={c.href} className="group cursor-pointer select-none">
+              <input type="checkbox" name="categories" value={`Spares — ${c.label}`} className="peer sr-only" />
+              <span className="inline-flex items-center rounded-sm border border-navy-600 px-3 py-1.5 text-xs text-cream-200 transition-colors hover:border-brass-500/60 peer-checked:border-brass-500 peer-checked:bg-brass-500/12 peer-checked:text-brass-400 peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-brass-500">
+                {c.label}
+              </span>
+            </label>
+          ))}
+        </div>
+        <p className="mb-6 text-xs text-slate-400">
+          For spares, include the maker, type and serial number in the message
+          or attach the nameplate photograph — it removes a round of
+          clarification.
+        </p>
 
         <div className="mb-6">
           <Label htmlFor={field("requisition")}>

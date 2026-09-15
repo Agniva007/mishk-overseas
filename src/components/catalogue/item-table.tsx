@@ -7,6 +7,7 @@ import {
   type SupplyItem,
 } from "@/data/supplies";
 import { Input } from "@/components/ui/input";
+import { PAGE_SIZE, Pagination } from "@/components/ui/pagination";
 import { cn } from "@/lib/utils";
 
 const FILTERS: { key: Availability | "all"; label: string }[] = [
@@ -28,7 +29,9 @@ const toneFor: Record<Availability, string> = {
  * something a purchasing officer can work from.
  *
  * Filtering is client-side over a list of tens of items, so no virtualisation
- * or debounce is warranted.
+ * or debounce is warranted. Paging is applied after filtering, and resets to
+ * page 1 whenever the query or filter changes — otherwise a search from page 3
+ * lands the reader on an empty page.
  */
 export function ItemTable({
   items,
@@ -39,6 +42,8 @@ export function ItemTable({
 }) {
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<Availability | "all">("all");
+  const [page, setPage] = useState(1);
+  const [showAll, setShowAll] = useState(false);
   const searchId = useId();
 
   const visible = useMemo(() => {
@@ -53,6 +58,17 @@ export function ItemTable({
       );
     });
   }, [items, query, filter]);
+
+  const totalPages = Math.max(1, Math.ceil(visible.length / PAGE_SIZE));
+
+  /* Clamp during render rather than in an effect — if a filter shrinks the
+     result set below the current page, page 1 is the correct answer now, not
+     after a second render. */
+  const safePage = Math.min(page, totalPages);
+
+  const rows = showAll
+    ? visible
+    : visible.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
 
   const counts = useMemo(() => {
     const by = { stock: 0, indent: 0, "on-request": 0 } as Record<Availability, number>;
@@ -75,7 +91,10 @@ export function ItemTable({
             id={searchId}
             type="search"
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={(e) => {
+              setQuery(e.target.value);
+              setPage(1);
+            }}
             placeholder="Item name or unit"
             autoComplete="off"
           />
@@ -92,7 +111,10 @@ export function ItemTable({
                 <button
                   key={f.key}
                   type="button"
-                  onClick={() => setFilter(f.key)}
+                  onClick={() => {
+                    setFilter(f.key);
+                    setPage(1);
+                  }}
                   aria-pressed={active}
                   className={cn(
                     "inline-flex items-center gap-2 rounded-sm border px-3 py-1.5 text-xs transition-colors",
@@ -136,7 +158,7 @@ export function ItemTable({
             </tr>
           </thead>
           <tbody>
-            {visible.map((item) => (
+            {rows.map((item) => (
               <tr
                 key={item.name}
                 className="border-b border-navy-600 transition-colors last:border-0 hover:bg-navy-800/60"
@@ -194,8 +216,30 @@ export function ItemTable({
       </div>
 
       <p aria-live="polite" className="mt-4 font-mono text-xs text-slate-400">
-        Showing {visible.length} of {items.length} items
+        {visible.length === items.length
+          ? `${items.length} items`
+          : `${visible.length} of ${items.length} items match`}
+        {!showAll && visible.length > PAGE_SIZE && (
+          <> · showing {(safePage - 1) * PAGE_SIZE + 1}&ndash;
+            {Math.min(safePage * PAGE_SIZE, visible.length)}</>
+        )}
       </p>
+
+      {visible.length > PAGE_SIZE && (
+        <Pagination
+          className="mt-5"
+          page={safePage}
+          totalPages={totalPages}
+          onPageChange={setPage}
+          showAll={showAll}
+          onShowAllChange={(v) => {
+            setShowAll(v);
+            setPage(1);
+          }}
+          totalItems={visible.length}
+          label="items"
+        />
+      )}
     </div>
   );
 }

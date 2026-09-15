@@ -1,8 +1,9 @@
 import Link from "next/link";
 import {
   aboutLinks,
-  services,
+  serviceGroupLinks,
   site,
+  sparesCategories,
   supplyCategories,
 } from "@/data/site";
 import { Container } from "./container";
@@ -46,7 +47,7 @@ export function Footer() {
         <CompassRose className="pointer-events-none absolute -bottom-32 -right-28 size-[30rem] text-cream-50/[0.04]" />
 
         <Container className="relative">
-          <div className="grid gap-10 py-16 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+          <div className="grid gap-10 py-16 md:grid-cols-2 lg:grid-cols-5 lg:gap-8">
             {/* --- Company ---------------------------------------------- */}
             <div>
               <Link href="/" className="flex items-center gap-2.5">
@@ -96,15 +97,43 @@ export function Footer() {
               </ul>
             </nav>
 
-            {/* --- Services --------------------------------------------- */}
+            {/* --- Spares ----------------------------------------------- */}
+            <nav aria-labelledby="footer-spares">
+              <div id="footer-spares">
+                <ColumnHeading>Spares</ColumnHeading>
+              </div>
+              <ul className="space-y-2.5">
+                {sparesCategories.slice(0, 8).map((c) => (
+                  <FooterLink key={c.href} href={c.href} label={c.label} />
+                ))}
+                <li>
+                  <Link
+                    href="/spares"
+                    className="text-sm text-brass-500 transition-colors hover:text-brass-400"
+                  >
+                    All spares →
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+
+            {/* --- Services & company ----------------------------------- */}
             <nav aria-labelledby="footer-services">
               <div id="footer-services">
                 <ColumnHeading>Services</ColumnHeading>
               </div>
               <ul className="space-y-2.5">
-                {services.map((s) => (
-                  <FooterLink key={s.href} href={s.href} label={s.label} />
+                {serviceGroupLinks.map((g) => (
+                  <FooterLink key={g.href} href={g.href} label={g.label} />
                 ))}
+                <li>
+                  <Link
+                    href="/services"
+                    className="text-sm text-brass-500 transition-colors hover:text-brass-400"
+                  >
+                    All services →
+                  </Link>
+                </li>
               </ul>
 
               <div className="mt-8">

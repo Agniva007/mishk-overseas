@@ -12,12 +12,25 @@ export const disciplines = [
     href: "/supplies",
     photo: "discipline-supplies",
     blurb:
-      "Provisions, bonded stores, deck and engine spares, safety gear and chemicals — sourced against IMPA codes and delivered alongside.",
+      "Provisions, bonded stores, deck and engine consumables, safety gear and chemicals — ordered by description and IMPA code.",
     points: [
       "11 catalogued categories",
-      "IMPA / ISSA coded item lists",
+      "198 published lines with units",
       "Cold chain for fresh and frozen",
       "Quality check on every consignment",
+    ],
+  },
+  {
+    title: "Marine Spares",
+    href: "/spares",
+    photo: "spares-procurement",
+    blurb:
+      "Engine, turbocharger, pump, purifier and automation parts — ordered by maker, model and part number, against the nameplate.",
+    points: [
+      "15 equipment categories",
+      "Genuine, equivalent or reconditioned",
+      "Exchange units where a core exists",
+      "Nothing substituted silently",
     ],
   },
   {
@@ -25,11 +38,11 @@ export const disciplines = [
     href: "/services",
     photo: "discipline-services",
     blurb:
-      "Running repairs afloat and in dock, spares procurement, workshop jobs and riding squads mobilised to any port on our list.",
+      "Overhauls, hull and pipework, electrical and automation, and riding squads — scoped before anyone is mobilised.",
     points: [
+      "22 service lines in five groups",
+      "Scope states what is not included",
       "Repair teams afloat or in dock",
-      "Motor rewinding and lathe work",
-      "Fabrication, welding and pipe renewal",
       "Riding squads supplied at sea",
     ],
   },

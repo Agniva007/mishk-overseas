@@ -18,7 +18,7 @@ export function CategoryGrid() {
       id="supplies"
       eyebrow="Ship supplies"
       title="Eleven catalogued categories."
-      lede="Every category is published with IMPA codes, units of issue and current availability — so your purchasing team can quote straight from the page instead of waiting on a call back."
+      lede="Ordered by description and IMPA code. Every category is published with units of issue and current availability, so your purchasing team can build a requisition straight from the page. Looking for a part identified by its nameplate? That is Marine Spares."
     >
       <ul className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {supplyCategories.map((c, i) => (

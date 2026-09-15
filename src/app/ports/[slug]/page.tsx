@@ -13,7 +13,8 @@ import { HairlineRule } from "@/components/marine/hairline-rule";
 import { QuoteCTA } from "@/components/sections/quote-cta";
 import { coastLabels, coverageFor, ports } from "@/data/ports";
 import { supplies } from "@/data/supplies";
-import { serviceDetails } from "@/data/services";
+import { serviceGroups, servicesInGroup } from "@/data/services";
+import { spares } from "@/data/spares";
 import { site } from "@/data/site";
 
 const getPort = (slug: string) => ports.find((p) => p.slug === slug);
@@ -179,7 +180,7 @@ export default async function PortPage({
       <Section
         tone="panel"
         eyebrow="Supplies"
-        title={`What we deliver to ${port.name}.`}
+        title={`Stores delivered to ${port.name}.`}
         lede="Every catalogued category, with unit of issue and availability published."
       >
         <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -200,22 +201,55 @@ export default async function PortPage({
         </ul>
       </Section>
 
-      {/* --- Services here ------------------------------------------------ */}
+      {/* --- Spares here --------------------------------------------------- */}
       <Section
-        eyebrow="Services"
-        title={`Technical attendance at ${port.name}.`}
+        eyebrow="Spares"
+        title={`Spares delivered to ${port.name}.`}
+        lede="Sourced against the nameplate and consolidated to the port of call."
       >
         <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {serviceDetails.map((s, i) => (
-            <Reveal key={s.slug} as="li" delay={(i % 3) * 40}>
+          {spares.map((c, i) => (
+            <Reveal key={c.slug} as="li" delay={(i % 3) * 40}>
               <Link
-                href={`/services/${s.slug}`}
-                className="flex h-full flex-col rounded-md border border-navy-600 bg-navy-800 px-5 py-4 transition-colors hover:border-brass-500"
+                href={`/spares/${c.slug}`}
+                className="flex items-center gap-3 rounded-md border border-navy-600 bg-navy-800 px-5 py-4 transition-colors hover:border-brass-500"
               >
-                <span className="text-sm font-semibold text-cream-50">
-                  {s.name}
+                <PlimsollBullet className="size-4 shrink-0 text-brass-500" />
+                <span className="text-sm text-cream-200">
+                  {c.name.replace(/ Spares$/, "")}
                 </span>
-                <span className="mt-1 text-xs text-slate-400">{s.tagline}</span>
+                <span className="ml-auto font-mono text-xs text-slate-400">
+                  {c.items.length}
+                </span>
+              </Link>
+            </Reveal>
+          ))}
+        </ul>
+      </Section>
+
+      {/* --- Services here ------------------------------------------------ */}
+      <Section
+        tone="panel"
+        eyebrow="Services"
+        title={`Technical attendance at ${port.name}.`}
+        lede="Grouped by discipline — every service is available at this port subject to scope."
+      >
+        <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {serviceGroups.map((g, i) => (
+            <Reveal key={g.key} as="li" delay={(i % 3) * 50}>
+              <Link
+                href={`/services#${g.key}`}
+                className="flex h-full flex-col rounded-md border border-navy-600 bg-navy-900 p-5 transition-colors hover:border-brass-500"
+              >
+                <span className="text-base font-semibold text-cream-50">
+                  {g.name}
+                </span>
+                <span className="mt-1 text-xs leading-relaxed text-slate-400">
+                  {g.blurb}
+                </span>
+                <span className="mt-3 font-mono text-xs text-brass-500">
+                  {servicesInGroup(g.key).length} services
+                </span>
               </Link>
             </Reveal>
           ))}

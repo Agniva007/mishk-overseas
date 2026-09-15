@@ -93,4 +93,13 @@ export const SLOTS = [
     "workers ship deck painting maintenance",
     "crew working ship deck",
   ]},
+  // --- Spares & extended services (wide) ----------------------------------
+  { id: "turbocharger", alt: "An engineer working on a turbine rotor and blades", ratio: "wide", queries: ["turbine rotor blades"] },
+  { id: "marine-pump", alt: "Centrifugal and mixed-flow pump impellers", ratio: "wide", queries: ["pump impeller"] },
+  { id: "hydraulic", alt: "A hydraulic cylinder and machined ram", ratio: "wide", queries: ["hydraulic cylinder"] },
+  { id: "pcb-electronics", alt: "A technician repairing electronics at a test bench", ratio: "wide", queries: ["electronic circuit board repair"] },
+  { id: "bridge-nav", alt: "A ship's bridge console with navigation displays", alt2: "", ratio: "wide", queries: ["ship bridge console"] },
+  { id: "underwater-diver", alt: "A commercial diver being fitted with a diving helmet", ratio: "wide", queries: ["commercial diver underwater"] },
+  { id: "refrigeration", alt: "Refrigeration compressors in a machinery plant room", ratio: "wide", queries: ["refrigeration compressor"] },
+  { id: "deck-winch", alt: "An anchor windlass and cable on a ship's deck", ratio: "wide", queries: ["anchor windlass"] },
 ];

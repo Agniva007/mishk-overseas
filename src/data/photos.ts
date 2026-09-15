@@ -326,6 +326,126 @@ export const photos: Photo[] = [
     "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
     "author": "ATSB, photo by ABIS Chris Beerens, RAN",
     "source": "https://commons.wikimedia.org/wiki/File:Fugro_Discovery_crew_members_working_with_the_search_equipment_(3).jpg"
+  },
+  {
+    "id": "turbocharger",
+    "alt": "An engineer working on a turbine rotor and blades",
+    "ratio": "wide",
+    "widths": [
+      1600,
+      800
+    ],
+    "lqip": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAAAQBACdASoUAAsAPu1iqk4ppaQiMAgBMB2JYgCdMoRwACfg84NHDUHXAAD+0PDu8k30aI7J1QhqW6nUOR8k2TmJph/vpiEQbiQYyZhTERYq/MT2ta9OMrTlI/LHmXa2IXQAAA==",
+    "title": "Dampfturbine Laeufer01.jpg",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "author": "Siemens Pressebild, http://www.siemens.com",
+    "source": "https://commons.wikimedia.org/wiki/File:Dampfturbine_Laeufer01.jpg"
+  },
+  {
+    "id": "marine-pump",
+    "alt": "Centrifugal and mixed-flow pump impellers",
+    "ratio": "wide",
+    "widths": [
+      1600,
+      800
+    ],
+    "lqip": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAACwAwCdASoUAAsAPu1iqU2ppaQiMAgBMB2JYgCdABZIG2BYsbdSZAD+lNj6y0h/eSg9vK50WBKoTMhp9ENJ0kndglfFJjXO7ITu83BS5zZWdqbSS13xZPQjGWgwGQAGaDAAAA==",
+    "title": "Pump Impellers-1.jpg",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "author": "Meisam",
+    "source": "https://commons.wikimedia.org/wiki/File:Pump_Impellers-1.jpg"
+  },
+  {
+    "id": "hydraulic",
+    "alt": "A hydraulic cylinder and machined ram",
+    "ratio": "wide",
+    "widths": [
+      1600,
+      800
+    ],
+    "lqip": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAADQAwCdASoUAAsAPu1kq04ppaQiMAgBMB2JZwDE2Bn1vhJVqT0BBzgA/n6T/H+moxqWj3qDbrTPp+vKv5aA48vzOeM+VumJ2UYCF2vY0vgAAA==",
+    "title": "Hydraulic press brake's cylinder.jpg",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "author": "Márton Kiss-Albert",
+    "source": "https://commons.wikimedia.org/wiki/File:Hydraulic_press_brake%27s_cylinder.jpg"
+  },
+  {
+    "id": "pcb-electronics",
+    "alt": "A technician repairing electronics at a test bench",
+    "ratio": "wide",
+    "widths": [
+      1600,
+      800
+    ],
+    "lqip": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAADwAwCdASoUAAsAPu1iqk2ppaQiMAgBMB2JYwC7ACHgSWumq2dczqOQAP7b1M1Ju42VqcWxZmIWrcCUpMNVxI02eqAAAA==",
+    "title": "USS Carl Vinson electronic repair shop operations 150219-N-HD510-015.jpg",
+    "license": "Public domain",
+    "licenseUrl": "",
+    "author": "Feb. 19, 2015",
+    "source": "https://commons.wikimedia.org/wiki/File:USS_Carl_Vinson_electronic_repair_shop_operations_150219-N-HD510-015.jpg"
+  },
+  {
+    "id": "bridge-nav",
+    "alt": "A ship's bridge console with navigation displays",
+    "ratio": "wide",
+    "widths": [
+      1600,
+      800
+    ],
+    "lqip": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAACwAwCdASoUAAsAPu1kqk4ppaQiMAgBMB2JYwAAW+heQjgxTnmOAAD3yO8iAur9uQT6ikFSPs6FfgOlx23xIHmY6nEZ1quFXAAAAA==",
+    "title": "Ship simulator.JPG",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "author": "Alf van Beem",
+    "source": "https://commons.wikimedia.org/wiki/File:Ship_simulator.JPG"
+  },
+  {
+    "id": "underwater-diver",
+    "alt": "A commercial diver being fitted with a diving helmet",
+    "ratio": "wide",
+    "widths": [
+      1600,
+      800
+    ],
+    "lqip": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAADQAwCdASoUAAsAPu1iqU2ppaOiMAgBMB2JYwDCoIjDAaPlhTwQQDAA/sDk6e7YoQzY59LM4wM1yJb/10m51KelKer8LfbtX5xlR6vIZlAjh5SHm2OuYAAA",
+    "title": "US Navy 050817-N-7415V-008 Hull Technician 3rd Class Zachary DiMare, left, assists Philippine Navy diver Rolando Abul during a training dive held aboard the rescue and salvage ship USS Safeguard (ARS 50).jpg",
+    "license": "Public domain",
+    "licenseUrl": "",
+    "author": "U.S. Navy photo by Photographer's Mate 1st Class David Votroubek",
+    "source": "https://commons.wikimedia.org/wiki/File:US_Navy_050817-N-7415V-008_Hull_Technician_3rd_Class_Zachary_DiMare,_left,_assists_Philippine_Navy_diver_Rolando_Abul_during_a_training_dive_held_aboard_the_rescue_and_salvage_ship_USS_Safeguard_(ARS_50).jpg"
+  },
+  {
+    "id": "refrigeration",
+    "alt": "Refrigeration compressors in a machinery plant room",
+    "ratio": "wide",
+    "widths": [
+      1600,
+      800
+    ],
+    "lqip": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAADQAwCdASoUAAsAPu1iqU2ppaOiMAgBMB2JYwCw7Bbb+8hOw77wDxAA/l/Zo4+a/ECerHt3Sdf/sHqxyXxbKTDWhrLowL2EgAA=",
+    "title": "Reciprocating Compressor from an Industrial Refrigeration System 2.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "author": "Endora6398",
+    "source": "https://commons.wikimedia.org/wiki/File:Reciprocating_Compressor_from_an_Industrial_Refrigeration_System_2.jpg"
+  },
+  {
+    "id": "deck-winch",
+    "alt": "An anchor windlass and cable on a ship's deck",
+    "ratio": "wide",
+    "widths": [
+      1600,
+      800
+    ],
+    "lqip": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAACwAwCdASoUAAsAPu1mq04ppaQiMAgBMB2JaQAAUh/30RmDRYtQAAD+WAU7OV+7ETQ+zR3C+oUs3PGpi0ilQ0HOAyZ9mHmWN1gAAA==",
+    "title": "SS Stevens anchor windlass 01.jpg",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "author": "Wjwalrus",
+    "source": "https://commons.wikimedia.org/wiki/File:SS_Stevens_anchor_windlass_01.jpg"
   }
 ];
 

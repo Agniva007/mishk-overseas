@@ -55,6 +55,9 @@ export const site = {
 /* Navigation                                                                  */
 /* -------------------------------------------------------------------------- */
 
+import { spares } from "./spares";
+import { serviceGroups, serviceDetails } from "./services";
+
 export type NavLink = { label: string; href: string; blurb?: string };
 
 /** Photo id for a catalogue/service link — the last path segment. */
@@ -74,14 +77,29 @@ export const supplyCategories: NavLink[] = [
   { label: "Medical Supplies", href: "/supplies/medical-supplies", blurb: "Ship medicine chest" },
 ];
 
-export const services: NavLink[] = [
-  { label: "Ship Repair", href: "/services/ship-repair", blurb: "Afloat & in dock" },
-  { label: "Spares Procurement", href: "/services/spares-procurement", blurb: "OEM & equivalent sourcing" },
-  { label: "Motor Rewinding", href: "/services/motor-rewinding", blurb: "Workshop & on-board" },
-  { label: "Fabrication & Welding", href: "/services/fabrication-welding", blurb: "Steel renewal & pipe work" },
-  { label: "Mechanical & Electrical", href: "/services/mechanical-electrical", blurb: "Running repairs & surveys" },
-  { label: "Riding Squads", href: "/services/riding-squads", blurb: "Crew supplied at sea" },
-];
+/** Derived from spares.ts so the nav cannot drift from the catalogue. */
+export const sparesCategories: NavLink[] = spares.map((c) => ({
+  label: c.name.replace(/ Spares$/, ""),
+  href: `/spares/${c.slug}`,
+  blurb: c.tagline,
+}));
+
+/**
+ * The services panel lists the five GROUPS, not all 22 services — a
+ * twenty-two item mega-menu is a wall, not a menu.
+ */
+export const serviceGroupLinks: NavLink[] = serviceGroups.map((g) => ({
+  label: g.name,
+  href: `/services#${g.key}`,
+  blurb: g.blurb,
+}));
+
+/** Flat list of every service, for the footer and cross-links. */
+export const services: NavLink[] = serviceDetails.map((s) => ({
+  label: s.name,
+  href: `/services/${s.slug}`,
+  blurb: s.tagline,
+}));
 
 export const aboutLinks: NavLink[] = [
   { label: "About Mishk Overseas", href: "/about", blurb: "Who we are" },
@@ -91,6 +109,7 @@ export const aboutLinks: NavLink[] = [
 /** Top-level nav. `panel` entries open the mega-menu. */
 export const primaryNav = [
   { label: "Supplies", href: "/supplies", panel: "supplies" as const },
+  { label: "Spares", href: "/spares", panel: "spares" as const },
   { label: "Services", href: "/services", panel: "services" as const },
   { label: "Ports", href: "/ports" },
   { label: "About", href: "/about", panel: "about" as const },
@@ -104,20 +123,32 @@ export const panels = {
     items: supplyCategories,
     promo: {
       eyebrow: "Catalogue",
-      title: "IMPA-coded item lists",
-      body: "Every category published with units and availability — view the full list, or take it as a CSV.",
+      title: "198 lines, published",
+      body: "Every category with units and availability — view the full list, or take it as a CSV.",
       cta: "View the full catalogue",
       href: "/supplies/catalogue",
+    },
+  },
+  spares: {
+    title: "Marine Spares",
+    href: "/spares",
+    items: sparesCategories,
+    promo: {
+      eyebrow: "Sourcing",
+      title: "Send the nameplate",
+      body: "Maker, type and part number. Genuine, OEM-equivalent or reconditioned — each quoted and labelled plainly.",
+      cta: "How spares sourcing works",
+      href: "/spares",
     },
   },
   services: {
     title: "Technical Services",
     href: "/services",
-    items: services,
+    items: serviceGroupLinks,
     promo: {
       eyebrow: "24×7",
       title: "Vessel alongside now?",
-      body: "Riding squads and repair teams mobilised to any port on our list.",
+      body: "Repair teams and riding squads mobilised to any port on our list.",
       cta: "Request a quote",
       href: "/quote",
     },
@@ -129,7 +160,7 @@ export const panels = {
     promo: {
       eyebrow: "Coverage",
       title: "21 ports, one supplier",
-      body: "India's west and east coasts and the Gulf — supplies and technical attendance from a single desk.",
+      body: "India's west and east coasts and the Gulf — supplies, spares and technical attendance from a single desk.",
       cta: "See the ports",
       href: "/ports",
     },

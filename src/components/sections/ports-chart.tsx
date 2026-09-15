@@ -12,7 +12,6 @@ export function PortsChart() {
   return (
     <Section
       id="ports"
-      tone="panel"
       eyebrow="Where we deliver"
       title="Ports we serve."
       lede="Supply available now shown in brass; ports marked on request are served through partner agents. Hover a dot for its LOCODE."

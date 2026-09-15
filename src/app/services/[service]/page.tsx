@@ -74,16 +74,16 @@ export default async function ServicePage({
                   Request a Quote
                 </Link>
                 <Link
-                  href="/ports"
+                  href="/spares"
                   className={buttonClasses({ variant: "outline" })}
                 >
-                  Where we attend
+                  Parts for this job
                 </Link>
               </div>
             </div>
 
             <Photo
-              id={data.slug}
+              id={data.photo}
               ratio="portrait"
               sizes="(min-width: 1024px) 22rem, 100vw"
               className="rounded-md border border-navy-600"
@@ -221,7 +221,7 @@ export default async function ServicePage({
                   href={`/services/${s.slug}`}
                   className="group flex h-full flex-col overflow-hidden rounded-md border border-navy-600 bg-navy-800 transition-[border-color,transform] duration-[180ms] ease-marine hover:-translate-y-1 hover:border-brass-500"
                 >
-                  <Photo id={s.slug} ratio="wide" sizes="(min-width: 640px) 33vw, 100vw" />
+                  <Photo id={s.photo} ratio="wide" sizes="(min-width: 640px) 33vw, 100vw" />
                   <div className="p-5">
                     <h3 className="text-base font-semibold text-cream-50">{s.name}</h3>
                     <p className="mt-1 text-xs text-slate-400">{s.tagline}</p>

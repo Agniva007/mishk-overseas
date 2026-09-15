@@ -117,7 +117,7 @@ export function Header({ overlay }: { overlay?: boolean }) {
                       <Link
                         href={entry.href}
                         className={cn(
-                          "inline-flex h-10 items-center rounded-md px-3.5 text-sm transition-colors",
+                          "inline-flex h-10 items-center rounded-md px-2.5 text-sm transition-colors xl:px-3.5",
                           active
                             ? "text-brass-500"
                             : "text-cream-200 hover:text-brass-500",
@@ -159,7 +159,7 @@ export function Header({ overlay }: { overlay?: boolean }) {
                         }
                       }}
                       className={cn(
-                        "inline-flex h-10 items-center gap-1.5 rounded-md px-3.5 text-sm transition-colors",
+                        "inline-flex h-10 items-center gap-1.5 rounded-md px-2.5 text-sm transition-colors xl:px-3.5",
                         isOpen || active
                           ? "text-brass-500"
                           : "text-cream-200 hover:text-brass-500",
@@ -215,7 +215,7 @@ export function Header({ overlay }: { overlay?: boolean }) {
           onPointerEnter={cancelClose}
           onPointerLeave={scheduleClose}
         >
-          {(["supplies", "services", "about"] as const).map((key) => (
+          {(["supplies", "spares", "services", "about"] as const).map((key) => (
             <MegaMenu
               key={key}
               panel={key}

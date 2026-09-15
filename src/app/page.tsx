@@ -2,6 +2,7 @@ import { Hero } from "@/components/sections/hero";
 import { ProofBar } from "@/components/sections/proof-bar";
 import { Disciplines } from "@/components/sections/disciplines";
 import { CategoryGrid } from "@/components/sections/category-grid";
+import { SparesGrid } from "@/components/sections/spares-grid";
 import { PortsChart } from "@/components/sections/ports-chart";
 import { ProcessTimeline } from "@/components/sections/process-timeline";
 import { WhyUs } from "@/components/sections/why-us";
@@ -20,6 +21,7 @@ export default function Home() {
       <ProofBar />
       <Disciplines />
       <CategoryGrid />
+      <SparesGrid />
       <PortsChart />
       <ProcessTimeline />
       <WhyUs />

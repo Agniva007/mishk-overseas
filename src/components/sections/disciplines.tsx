@@ -13,10 +13,10 @@ export function Disciplines() {
   return (
     <Section
       eyebrow="What we do"
-      title="Two disciplines, one point of contact."
-      lede="Most vessels need both a chandler and a repair contractor. Running them through one supplier removes a handover — and a party to chase when something slips."
+      title="Three disciplines, one point of contact."
+      lede="A vessel in port usually needs stores, a part and a technician. Running all three through one supplier removes two handovers — and two parties to chase when something slips."
     >
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {disciplines.map((d, i) => (
           <Reveal key={d.title} delay={i * 80} as="article">
             <Link
@@ -26,12 +26,12 @@ export function Disciplines() {
               <Photo
                 id={d.photo}
                 ratio="wide"
-                sizes="(min-width: 1024px) 50vw, 100vw"
+                sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                 className="border-b border-navy-600"
               />
 
               <div className="flex flex-1 flex-col p-7">
-                <h3 className="font-display text-3xl font-semibold tracking-tight text-cream-50">
+                <h3 className="font-display text-2xl font-semibold tracking-tight text-cream-50 lg:text-3xl">
                   {d.title}
                 </h3>
                 <p className="mt-3 text-cream-200">{d.blurb}</p>
