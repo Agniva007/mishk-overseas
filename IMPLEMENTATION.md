@@ -16,16 +16,11 @@ Four reference sites were studied. What each does well, and what Mishk should ta
 | **shipsmithgroup.com** | Ship repair + surveys + maritime AI, Kolkata/Mumbai | Strong numeric proof bar (500+ ships / 180+ ports / 50+ yrs); "three disciplines, one partner" framing; testimonials with star rating; dedicated Certifications page | Spreads thin across three unrelated products; AI chatbot section dilutes the core trust message |
 | **royalmarinesuppliers.in** | Marine logistics + ship services, Kandla/Gandhidham | Ruthlessly clear hero: "Serving All Major Indian Ports, 24×7"; contact details surfaced *above the fold*; clean Products-vs-Services split | Very plain visually; icon-only product cards feel low-budget; little depth beyond the homepage |
 | **georgemarine.co.in** | Ship chandling since 1995, Goa | Ports list high on the page (huge for buyer intent); ISO 9001:2015 banner; named clients + brand partnerships (Shell Marine, Rochem) — the strongest trust section of the four | Dated stock photography; thin individual pages |
-| **theablemaritime.com** | Marine spares, by equipment type | Spares organised **by the machine the part belongs to** (main engine, turbocharger, compressor, deck equipment) rather than by maker — which is how a defect report arrives. Item counts published per category. | "Business & Industrial" is an undifferentiated dumping category; eBay storefront dilutes the trade positioning |
-| **newlinkmarine.com** | Marine spares trader, Ningbo | Groups spares under *Engine Room Equipment & Spares* and names the **engine makes and model ranges** it covers (MAN B&W L/S-MC, Sulzer RTA/RLB, Daihatsu, Yanmar) — the fastest way to tell a buyer "we cover your engine" | Expired TLS certificate; thin pages; no item-level detail |
-| **omship.in** | Ship repair services, India | The **most complete service list of the set** — 22 named services from main engine overhaul to VDR APT and PCB repair, each with a short plain description | Flat list with no grouping; no scope boundaries, so what is and is not included is unstated |
 | **mahirmarine.com** | Ship chandling, Indian ports | Best product taxonomy: 9 photo-led category cards, each with real imagery instead of icons; downloadable brochure; WebP optimisation | Almost no contact/footer info; shallow site; no service pages |
 
 ### Synthesised strategy for Mishk
 
-Take **Mahir's photo-led category grid**, **George's ports + clients trust stack**, **Royal's above-the-fold contact + 24×7 urgency**, **ShipSmith's numeric proof bar**, **Able's by-equipment spares taxonomy**, **Newlink's named engine makes**, and **OM Ship's service breadth** — and execute all of it on a design system that looks materially more premium than any of them.
-
-The structural improvement over every reference is **separating spares from both supplies and services**. Able mixes spares with general industrial goods; OM Ship folds parts into repair; Newlink buries the item detail. Mishk gets three clean catalogues with an explicit rule for which is which.
+Take **Mahir's photo-led category grid**, **George's ports + clients + certifications trust stack**, **Royal's above-the-fold contact + 24×7 urgency**, and **ShipSmith's numeric proof bar** — and execute all of it on a design system that looks materially more premium than any of them.
 
 The category that wins here is the one that looks like it can be trusted with a USD 40,000 provisioning order at 02:00 on a Sunday. That means: dark, calm, precise, fast, and with the phone number never more than one thumb-reach away.
 
@@ -159,49 +154,40 @@ The contrast script lives at `scripts/contrast.mjs` — re-run it after any pale
 ```
 /                               Home
 /about                          About Mishk Overseas
-/supplies                       Ship Chandling — ordered by description + IMPA code
-  /supplies/catalogue           Full catalogue, print-optimised
-  /supplies/catalogue.csv       CSV export
-  /supplies/[category]          11 categories · 198 lines
-/spares                         Marine Spares — ordered by maker + model + part no.
-  /spares/catalogue.csv         CSV export
-  /spares/[category]            15 categories · 187 lines · 101 makes
-/services                       Technical Services — 22 lines in 5 groups
-  /services/[service]           engine & machinery · hull, steel & deck ·
-                                electrical & electronics · hotel & auxiliary · crew
-/ports                          Ports We Serve (chart plot + list)
-  /ports/[slug]                 21 ports
+  /about/certifications         ISO, ISSA/IMPA membership, licences
+/supplies                       Ship Chandling overview (catalogue hub)
+  /supplies/provisions
+  /supplies/bonded-stores
+  /supplies/deck-stores
+  /supplies/engine-stores
+  /supplies/cabin-stores
+  /supplies/safety-equipment
+  /supplies/lubricants-chemicals
+  /supplies/marine-paints
+  /supplies/electrical-stores
+  /supplies/charts-publications
+  /supplies/medical-supplies
+/services                       Technical Services overview
+  /services/ship-repair
+  /services/spares-procurement
+  /services/motor-rewinding
+  /services/fabrication-welding
+  /services/mechanical-electrical
+  /services/riding-squads
+/ports                          Ports We Serve (map + list)
+  /ports/[slug]                 Per-port page — 12 to 15 key ports only
 /quote                          Request a Quote (the money page)
 /contact                        Contact + offices + 24×7 desk
 /clients                        Clients & partners
-/credits                        Photography attribution (licence condition)
-/legal/privacy                  Draft, noindex
-/legal/terms                    Draft, noindex
-/styleguide                     Internal design system, noindex
+/insights                       Blog / notices (MDX) — phase 3
+  /insights/[slug]
+/legal/privacy
+/legal/terms
 ```
 
-### Supplies vs Spares — the dividing line
+**Navigation bar:** `Supplies ▾ · Services ▾ · Ports · About ▾ · Contact` + a persistent brass **Request a Quote** button, and a mono `+91 ·············· · 24×7` strip.
 
-The two catalogues split by **how the item is identified**, which is how a
-purchasing team splits a requisition in the first place:
-
-| | Ship Supplies | Marine Spares |
-|---|---|---|
-| Ordered by | Description + IMPA code | Maker + model + part number |
-| Interchangeable? | Yes — any compliant item | No — the nameplate decides fit |
-| Example | "Valve, gate, bronze, 50mm" | "Kitz — valve seat and disc set" |
-| Catalogue | `supplies.ts` | `spares.ts` |
-
-**If the buyer has to quote the nameplate, it is a spare.** This rule is stated
-on the `/spares` hub for buyers and written at the top of both data files for
-whoever adds the next item. Apply it to every new line — it is the only thing
-keeping the two catalogues from blurring.
-
-**Navigation bar:** `Supplies ▾ · Spares ▾ · Services ▾ · Ports · About ▾ · Contact` + a persistent brass **Request a Quote** button, and a mono `+91 ·············· · 24×7` strip.
-
-`Supplies`, `Spares`, `Services` and `About` open a **mega-menu**: two columns of items plus a right-hand promo panel. On mobile these become an accordion inside a full-screen drawer.
-
-> The Services panel lists the **five groups**, not all 22 services — a twenty-two item mega-menu is a wall, not a menu. Spares lists all 15 categories, which fits two columns the same way Supplies does.
+`Supplies` and `Services` open a **mega-menu**: two columns of categories with 20px line icons, plus a right-hand promo panel ("Download the 2026 catalogue →"). On mobile these become an accordion inside a full-screen drawer.
 
 ---
 
@@ -412,9 +398,7 @@ Run `npm run build && npm run start`, then `npm run perf`. Figures below are gzi
 | **6 — Polish & launch** | 🟨 *Mostly done.* 20 licensed photographs sourced, cropped and encoded (AVIF + WebP, two widths, inline LQIP) with a `/credits` attribution page; certifications removed from scope; dynamic OG cards; `Organization` JSON-LD; axe audit clean across 16 routes; payload budget measured and corrected; downloadable catalogue pulled forward from phase 7. **Outstanding:** Lighthouse/browser pass, client's own photography, analytics decision, domain + DNS. | 1.5 d |
 | **7 — Phase 2 (later)** | MDX insights/blog, multilingual, CMS migration (Sanity/Payload), quote-tracking dashboard | — |
 
-| **8 — Spares split & service expansion** | ✅ *Done.* Spares separated from services into its own section: `spares.ts` with 15 equipment categories, 187 lines and 101 named makes, `/spares` hub with the supplies-vs-spares rule, `[category]` template with a nameplate-first parts table, CSV export and per-category OG cards. Services expanded from 6 to 22 in 5 groups. Homepage moved from two disciplines to three. 8 new photographs sourced. | — |
-
-**Total for a launchable v1: ~12 working days.**
+**Total for a launchable v1: ~10.5 working days.**
 
 ---
 
@@ -439,12 +423,7 @@ Until these arrive, the site builds and ships against clearly-marked placeholder
 - **Dark-first, not light.** Every competitor is white-and-blue. A navy-and-brass site is remembered; a white-and-blue one is compared on price.
 - **No theme toggle in v1.** The alternating navy/paper rhythm is the design; a toggle would break it for no user benefit.
 - **IMPA-coded item tables.** The highest-leverage content decision. It converts the site from a brochure into a procurement tool.
-- **Catalogue tables paginate at 12 rows, with a "Show all" escape hatch.** Paging appears only when a filtered list exceeds the page size, so short categories render whole and the control never appears for nothing. The escape hatch is not decoration: a purchasing officer scanning a catalogue reaches for Ctrl+F, and paging silently hides rows from it. Page resets to 1 on any search or filter change, and the current page is clamped during render — a filter that shrinks the set below the current page shows page 1 immediately, not after a second render.
-- **`/supplies/catalogue` is deliberately NOT paginated.** It is the print-and-save-as-PDF view; paging it would produce a one-page PDF. The hubs, services and ports indexes are not paginated either — they are already grouped (by coast, by service family), and pagination over a grouped card grid is worse than scrolling.
 - **IMPA codes are NOT invented.** The column, its search and its styling are built, but values render as `pending` until the client's coded spreadsheet arrives. A wrong six-digit code is not a cosmetic placeholder — a purchasing officer could order the wrong part from it. Every category page carries a visible notice saying so. Populate `impaCode` in `src/data/supplies.ts` from the client file, never by inference.
-- **Spares is a third section, not a service.** Supply of parts and supply of labour are different purchases with different buyers, lead times and decision criteria. Folding parts into "services" — as the reference sites do — hides the catalogue that a purchasing officer is actually searching for.
-- **No maker part numbers are published, and no distributorship is implied.** The spares tables name assemblies, never part numbers: a number is meaningless without its nameplate and a wrong one is something a buyer would order against. Maker names are listed as makes we *source for*, with an explicit statement on `/spares` that this is not a claim to be an authorised distributor, agent or licensee. Do not soften that wording.
-- **The services mega-menu shows groups, not services.** 22 items in a dropdown is a wall. The panel lists the five groups; the hub page carries the full set with a jump list.
 - **Photography is licensed stock, credited, and never passed off as theirs.** 20 images from Wikimedia Commons under licences allowing commercial use. Several are CC BY / CC BY-SA, so `/credits` — author, licence, source per image, linked from the footer — is a **licence condition, not a courtesy**. The About page deliberately uses a port scene rather than a warehouse: a stock warehouse photo beside copy about "our own warehousing" would read as a picture of theirs. Swap in real photography via `scripts/photos/`.
 - **The category gallery is built but not mounted.** One photograph repeated six times is not a gallery. `<Gallery>` is complete and keyboard-driven; it re-enables the moment per-category photo sets exist.
 - **Certifications removed at the client's request.** The page, homepage strip, hero badge and nav links are gone; nothing certification-related is claimed anywhere.
