@@ -1,57 +1,61 @@
 import Link from "next/link";
 import { Section } from "@/components/layout/section";
 import { Reveal } from "@/components/motion/reveal";
-import { PortTag } from "@/components/marine/port-tag";
-import { PortChart } from "@/components/marine/port-chart";
-import { coastLabels, ports, type Coast } from "@/data/ports";
+import { ChartLegend, WorldChart } from "@/components/marine/world-chart";
+import {
+  countryCount,
+  detailPorts,
+  ports,
+  portsInRegion,
+  regionLabels,
+  regionOrder,
+} from "@/data/ports";
 
-/** §4.1 #7 — Ports we serve. Chart plot left, grouped list right. */
+/** §4.1 #7 — Ports we serve. The whole network on one chart, then the index. */
 export function PortsChart() {
-  const byCoast = (coast: Coast) => ports.filter((p) => p.coast === coast);
+  const own = detailPorts.filter((p) => p.active).length;
 
   return (
     <Section
       id="ports"
       eyebrow="Where we deliver"
-      title="Ports we serve."
-      lede="Supply available now shown in brass; ports marked on request are served through partner agents. Hover a dot for its LOCODE."
+      title={`${ports.length} ports, ${countryCount} countries.`}
+      lede={`Every port we cover is on the chart. ${own} carry our own delivery on India's west and east coasts and at the UAE hubs; the rest are supplied and attended through appointed local agents — same requisition, same paperwork.`}
     >
-      <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:gap-14">
-        <Reveal className="rounded-md border border-navy-600 bg-navy-900 p-4 lg:p-6">
-          <PortChart />
-        </Reveal>
+      <Reveal className="rounded-md border border-navy-600 bg-navy-900 p-4 lg:p-6">
+        <WorldChart />
+        <ChartLegend className="mt-6 px-1" />
+      </Reveal>
 
-        <Reveal delay={80} className="space-y-8">
-          {(["west", "east", "gulf"] as const).map((coast) => (
-            <div key={coast}>
-              <h3 className="eyebrow mb-4 font-sans text-brass-500">
-                {coastLabels[coast]}
-              </h3>
-              <ul className="flex flex-wrap gap-2">
-                {byCoast(coast).map((port) => (
-                  <li key={port.slug}>
-                    <Link href={`/ports/${port.slug}`}>
-                      <PortTag
-                        code={port.locode}
-                        name={port.name}
-                        active={port.active}
-                      />
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+      <Reveal delay={80} className="mt-12">
+        <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+          {regionOrder.map((region) => (
+            <li key={region}>
+              <Link
+                href={`/ports#${region}`}
+                className="group flex h-full flex-col justify-between gap-3 rounded-md border border-navy-600 bg-navy-800 px-4 py-3.5 transition-colors hover:border-brass-500"
+              >
+                <span className="text-xs leading-snug text-cream-200">
+                  {regionLabels[region]}
+                </span>
+                <span className="font-mono text-lg text-brass-500">
+                  {portsInRegion(region).length}
+                </span>
+              </Link>
+            </li>
           ))}
+        </ul>
+      </Reveal>
 
-          <Link
-            href="/ports"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-brass-500 transition-colors hover:text-brass-400"
-          >
-            View all ports
-            <span aria-hidden="true">→</span>
-          </Link>
-        </Reveal>
-      </div>
+      <Reveal delay={140}>
+        <Link
+          href="/ports"
+          className="mt-10 inline-flex items-center gap-2 text-sm font-semibold text-brass-500 transition-colors hover:text-brass-400"
+        >
+          View all {ports.length} ports
+          <span aria-hidden="true">→</span>
+        </Link>
+      </Reveal>
     </Section>
   );
 }

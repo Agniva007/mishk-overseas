@@ -7,9 +7,9 @@ import { Photo } from "@/components/media/photo";
 import { photos } from "@/data/photos";
 
 export const metadata: Metadata = {
-  title: "Photography Credits",
+  title: "Credits & Attribution",
   description:
-    "Attribution for the photography used on this site, with source and licence for each image.",
+    "Attribution for the photography and map data used on this site, with source and licence for each.",
   alternates: { canonical: "/credits" },
 };
 
@@ -31,7 +31,7 @@ export default function CreditsPage() {
             items={[{ label: "Home", href: "/" }, { label: "Credits" }]}
           />
           <p className="eyebrow mb-4 text-brass-500">Attribution</p>
-          <h1 className="text-4xl lg:text-5xl">Photography credits.</h1>
+          <h1 className="text-4xl lg:text-5xl">Credits &amp; attribution.</h1>
           <HairlineRule className="my-8" width="w-20" />
           <div className="measure space-y-4 text-cream-200">
             <p>
@@ -104,6 +104,39 @@ export default function CreditsPage() {
               </li>
             ))}
           </ul>
+        </Container>
+      </section>
+
+      {/* --- Map data ----------------------------------------------------- */}
+      <section className="border-t border-navy-600 py-14 lg:py-20">
+        <Container>
+          <p className="eyebrow mb-4 text-brass-500">Map data</p>
+          <h2 className="text-2xl lg:text-3xl">The port chart.</h2>
+          <HairlineRule className="my-7" width="w-20" />
+          <div className="measure space-y-4 text-cream-200">
+            <p>
+              The coastline on the port chart is{" "}
+              <a
+                href="https://www.naturalearthdata.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-brass-500 underline-offset-4 transition-colors hover:text-brass-400 hover:underline"
+              >
+                Natural Earth
+              </a>{" "}
+              1:110m land, simplified for the plot. Natural Earth is in the
+              public domain and asks for no attribution; it is credited here
+              because knowing where a chart&rsquo;s geometry came from is the
+              sort of thing our trade cares about.
+            </p>
+            <p>
+              Port positions are real published coordinates and UN/LOCODEs. The
+              plot is Mercator, so a straight line on it is a constant bearing.
+              The trade lanes drawn between hubs are indicative routes, not
+              surveyed tracks, and nothing on the chart should be used for
+              navigation.
+            </p>
+          </div>
         </Container>
       </section>
     </main>

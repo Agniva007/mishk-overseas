@@ -17,7 +17,7 @@ import { serviceDetails, serviceGroups, servicesInGroup } from "@/data/services"
 export const metadata: Metadata = {
   title: "Technical Services",
   description:
-    "Marine repair and technical services at Indian and Gulf ports — main and auxiliary engine overhaul, turbochargers, pumps, boilers, hull steel, pipework, deck machinery, electrical, automation, navigation and riding squads.",
+    "Marine repair and technical services at Indian, Gulf and global ports — main and auxiliary engine overhaul, turbochargers, pumps, boilers, hull steel, pipework, deck machinery, electrical, automation, navigation and riding squads.",
   alternates: { canonical: "/services" },
 };
 

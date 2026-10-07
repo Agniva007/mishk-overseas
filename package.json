@@ -10,7 +10,8 @@
     "contrast": "node scripts/contrast.mjs",
     "test:forms": "tsx scripts/test-forms.mts",
     "audit:a11y": "tsx scripts/audit-a11y.mts",
-    "perf": "tsx scripts/perf.mts"
+    "perf": "tsx scripts/perf.mts",
+    "gen:world": "node scripts/gen-world-outline.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",

@@ -6,7 +6,7 @@ import { buttonClasses } from "@/components/ui/button";
 import { HairlineRule } from "@/components/marine/hairline-rule";
 import { PlimsollBullet } from "@/components/marine/plimsoll-bullet";
 import { availabilityLabels, supplies, totalItems } from "@/data/supplies";
-import { ports } from "@/data/ports";
+import { countryCount, ports } from "@/data/ports";
 import { site } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -55,8 +55,8 @@ export default function CataloguePage() {
 
           <p className="measure text-cream-200 print:text-black">
             {supplies.length} categories · {totalItems} lines · delivered to{" "}
-            {ports.length} ports across India and the Gulf. Availability is
-            indicative; confirm at enquiry.
+            {ports.length} ports across {countryCount} countries. Availability
+            is indicative; confirm at enquiry.
           </p>
 
           <dl className="mt-6 grid gap-x-8 gap-y-2 font-mono text-xs sm:grid-cols-2 lg:grid-cols-4 print:text-black">

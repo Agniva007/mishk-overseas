@@ -6,6 +6,7 @@ import { CompassRose } from "@/components/marine/compass-rose";
 import { HairlineRule } from "@/components/marine/hairline-rule";
 import { ChartGrid } from "@/components/marine/chart-grid";
 import { Photo } from "@/components/media/photo";
+import { countryCount, ports } from "@/data/ports";
 
 /**
  * §4.1 #3 — Hero. min-h-[88vh], never a full 100vh.
@@ -65,7 +66,10 @@ export function Hero() {
         </div>
 
         <div className="mt-14 flex flex-wrap items-center gap-3">
-          <Badge tone="teal" dot>48+ Ports</Badge>
+          {/* Read from the data, not typed in — see the port count note in
+              @/data/ports. */}
+          <Badge tone="teal" dot>{ports.length} Global Ports</Badge>
+          <Badge tone="neutral">{countryCount} Countries</Badge>
           <Badge tone="neutral">24/7 Response</Badge>
         </div>
       </Container>

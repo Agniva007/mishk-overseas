@@ -16,7 +16,7 @@ import { supplies, totalItems } from "@/data/supplies";
 export const metadata: Metadata = {
   title: "Ship Supplies",
   description:
-    "Eleven catalogued supply categories — provisions, bonded stores, deck and engine stores, safety equipment, lubricants, paints and more — supplied to vessels at Indian and Gulf ports.",
+    "Eleven catalogued supply categories — provisions, bonded stores, deck and engine stores, safety equipment, lubricants, paints and more — supplied to vessels at 148 ports worldwide.",
 };
 
 export default function SuppliesPage() {

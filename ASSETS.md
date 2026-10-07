@@ -17,7 +17,7 @@ in that file needs replacing.
 |---|---|---|
 | Main phone | `+91 00000 00000` | Real switchboard number |
 | 24×7 emergency line | `+91 00000 00000` | Real out-of-hours number |
-| WhatsApp business number | `wa.me/910000000000` | Real WhatsApp link |
+| WhatsApp business number | `wa.me/910000000000` | Real WhatsApp link — now drives the floating button on **every** page, so a wrong number here is the most visible placeholder on the site |
 | Email | `supply@mishkoverseas.com` | Confirm this is live |
 | Head office address | `Address line 1/2, Gandhidham` | Full registered address |
 | Branch address(es) | `Address line 1/2, Mumbai` | Confirm branches exist, full addresses |
@@ -34,25 +34,55 @@ in that file needs replacing.
 
 Used in the header proof bar and homepage. All four are currently invented.
 
-- Ports served (placeholder: 48+)
+- Global ports served (currently 148 — mirrors `ports.length`; keep the two in step)
 - Vessels supplied (placeholder: 500+)
 - Years in trade (placeholder: 20+)
 - Quote turnaround (placeholder: 2 hr) — **this one is a public promise; confirm it is deliverable**
 
 ## 3. Ports list — 🟨 PLACEHOLDER SET IN PLACE
 
-`src/data/ports.ts` holds 21 Indian and Gulf ports. **The coordinates are real**
-(they drive the homepage chart plot). Everything else — which ports are actually
-served, active vs. on-request status, and lead times — is invented and must be
-confirmed or replaced.
+`src/data/ports.ts` holds **148 ports across 30 countries**, matching the
+client's stated "we cover 148 global ports". **Coordinates and UN/LOCODEs are
+real published values.** Everything else — which ports are actually served,
+active vs. on-request status, lead times and agent arrangements — is invented
+and must be confirmed or replaced.
 
-The `/ports/[slug]` pages are the primary SEO asset. For each port:
+The list is in two tiers, and the distinction drives the whole ports section:
+
+| Tier | Count | What it means | Has a page? |
+|---|---|---|---|
+| `core` | 21 | Indian west/east coasts + the UAE hubs. Own desk, published lead times, alongside/anchorage known. | Yes — `/ports/[slug]` |
+| `network` | 127 | The global reach: Saudi, Oman, Suez & Red Sea, Far East, South East Asia, Australia, Europe & Gibraltar, Americas & Panama, Africa. Served through appointed local agents, quoted case by case. | No — listed on `/ports` only |
+
+**Why network ports have no detail page:** 127 pages differing only by name and
+LOCODE would read as thin, duplicate content and drag the 21 core port pages
+down with them. A network port earns a page when there is real local detail to
+put on it — fill `notes` and flip `tier` to `core`. See §11.
+
+**The chart plot** (`src/components/marine/world-chart.tsx`) shows **every**
+port, core and network — a Mercator world chart over real Natural Earth
+coastline (public domain; credited on `/credits`). Core ports burn brass,
+network ports are teal rings. The coastline is generated, not hand-authored:
+`npm run gen:world -- <ne_110m_land.json>` rewrites `src/data/world-outline.ts`,
+and the header of that file carries the fetch URL and the tuning knobs.
+
+The trade lanes drawn on it are indicative routes between hubs, tuned by eye
+to bend around land. They are decoration with a point, not surveyed tracks —
+if the client objects to any lane implying a service we do not run, delete it
+from `LANES` in the chart component.
+
+Confirm per core port:
 
 - Port name and UN/LOCODE
 - Alongside and/or anchorage capability
 - Typical delivery lead time
 - Which supply categories and services are available there
 - Local agent contact, if any
+
+Confirm per region for the network tier: that we can in fact cover it, and
+which countries have a standing agent vs. an ad-hoc one. If the real list
+differs in size, the `148` figure in `src/data/site.ts` → `stats` must change
+with it — the pages themselves all read `ports.length`.
 
 ## 4. Certifications — ⛔ REMOVED FROM SCOPE
 
@@ -234,7 +264,7 @@ face.
 
 This is the single highest-value piece of outstanding content.
 
-The 21 `/ports/[slug]` pages currently differ only by name, LOCODE,
+The 21 core `/ports/[slug]` pages currently differ only by name, LOCODE,
 coordinates, lead time, delivery mode and nearby ports. The supplies and
 services blocks are identical on every one of them, which search engines can
 read as thin or duplicate content — on exactly the pages that are supposed to
@@ -248,6 +278,10 @@ and stays hidden while it is empty.
 
 Also confirm per port: whether coverage is real, alongside vs. anchorage
 capability, and actual lead times. Coordinates are correct and need no review.
+
+The same field is the gate for promoting a network port to its own page: write
+`notes`, set `tier: "core"`, fill in `leadTime`, `alongside` and `anchorage`,
+and the page, the sitemap entry and the OG card all appear on their own.
 
 ## 12. Browser verification — ⬜ NEVER DONE
 
@@ -280,7 +314,7 @@ Run `grep -rn "PLACEHOLDER" src/` to find them.
 | File | What is placeholdered |
 |---|---|
 | `src/data/site.ts` | All contact details, addresses, statistics, social URLs |
-| `src/data/ports.ts` | Port coverage, active status, lead times (coordinates are real) |
+| `src/data/ports.ts` | Port coverage, tier, active status, lead times (coordinates and LOCODEs are real) |
 | `src/data/home.ts` | Client names, testimonials, certification claims |
 | `src/data/services.ts` | Equipment specs, case notes (both empty); scope wording needs sign-off |
 | `src/data/spares.ts` | Maker list, availability flags, exchange-basis claims |

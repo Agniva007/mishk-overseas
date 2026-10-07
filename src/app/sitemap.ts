@@ -3,7 +3,7 @@ import { site } from "@/data/site";
 import { supplies } from "@/data/supplies";
 import { spares } from "@/data/spares";
 import { serviceDetails } from "@/data/services";
-import { ports } from "@/data/ports";
+import { detailPorts } from "@/data/ports";
 
 /**
  * Generated from the data files, so new categories, services and ports are
@@ -55,7 +55,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   if (BUILT.ports) {
     routes.push(entry("/ports", 0.8));
-    routes.push(...ports.map((p) => entry(`/ports/${p.slug}`, 0.7)));
+    /* Core ports only — network ports have no page. See @/data/ports. */
+    routes.push(...detailPorts.map((p) => entry(`/ports/${p.slug}`, 0.7)));
   }
 
   if (BUILT.quote) routes.push(entry("/quote", 0.8));

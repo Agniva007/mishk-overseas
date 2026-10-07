@@ -19,7 +19,7 @@ import { site } from "@/data/site";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Mishk Overseas supplies and services vessels at Indian and Gulf ports — ship chandling across eleven catalogued categories and six technical service lines.",
+    "Mishk Overseas supplies and services vessels at 148 ports worldwide — India, the Gulf, Suez, the Far East, Europe, the Americas, Australia and Africa — ship chandling across eleven catalogued categories and six technical service lines.",
   alternates: { canonical: "/about" },
 };
 

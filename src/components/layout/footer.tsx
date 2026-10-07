@@ -57,8 +57,9 @@ export function Footer() {
                 </span>
               </Link>
               <p className="mt-4 max-w-xs text-sm leading-relaxed text-slate-400">
-                Ship chandling and marine technical services across Indian and
-                Gulf ports. One window for the whole requisition.
+                Ship chandling and marine technical services at 148 ports
+                worldwide — India, the Gulf and the trade lanes beyond. One
+                window for the whole requisition.
               </p>
 
               <ul className="mt-6 flex gap-4">
@@ -205,7 +206,7 @@ export function Footer() {
               <FooterLink href="/legal/privacy" label="Privacy" />
               <FooterLink href="/legal/terms" label="Terms" />
               {/* Licence condition for the CC BY / CC BY-SA photography. */}
-              <FooterLink href="/credits" label="Photo credits" />
+              <FooterLink href="/credits" label="Credits & attribution" />
               <li className="font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-slate-400">
                 Made for the maritime trade
               </li>

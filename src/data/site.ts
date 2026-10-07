@@ -13,7 +13,7 @@ export const site = {
   url: "https://mishkoverseas.com",
   tagline: "Ship Chandling & Marine Technical Services",
   description:
-    "Ship chandling and marine technical services across Indian and Gulf ports. Provisions, bonded stores, deck and engine supplies, ship repair and spares. 24×7 supply desk.",
+    "Ship chandling and marine technical services at 148 ports worldwide — India, the Gulf, Suez, the Far East, South East Asia, Australia, Europe, the Americas and Africa. Provisions, bonded stores, deck and engine supplies, ship repair and spares. 24×7 supply desk.",
 
   /* PLACEHOLDER — client to confirm */
   phone: { display: "+91 00000 00000", href: "tel:+910000000000" },
@@ -26,9 +26,12 @@ export const site = {
     { label: "Instagram", href: "#" },
   ],
 
-  /* PLACEHOLDER — client to confirm every figure */
+  /* PLACEHOLDER — client to confirm every figure.
+     The port count is the one figure with a source of truth: keep it equal to
+     `ports.length` in src/data/ports.ts. Hardcoded rather than imported so the
+     148-entry port list stays out of every client bundle that touches `site`. */
   stats: [
-    { value: 48, suffix: "+", label: "Ports served" },
+    { value: 148, suffix: "", label: "Global ports served" },
     { value: 500, suffix: "+", label: "Vessels supplied" },
     { value: 20, suffix: "+", label: "Years in trade" },
     { value: 2, suffix: "hr", label: "Quote turnaround" },
@@ -159,8 +162,8 @@ export const panels = {
     items: aboutLinks,
     promo: {
       eyebrow: "Coverage",
-      title: "21 ports, one supplier",
-      body: "India's west and east coasts and the Gulf — supplies, spares and technical attendance from a single desk.",
+      title: "148 ports, one supplier",
+      body: "India's coasts and the Gulf on our own delivery; the Far East, Europe, the Americas, Australia and Africa through our agent network — all from a single desk.",
       cta: "See the ports",
       href: "/ports",
     },

@@ -3,6 +3,7 @@ import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
 import { UtilityStrip } from "@/components/layout/utility-strip";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { WhatsAppFab } from "@/components/layout/whatsapp-fab";
 import { site } from "@/data/site";
 import "./globals.css";
 
@@ -86,6 +87,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Header />
         {children}
         <Footer />
+        {/* Last in the DOM so it reads as supplementary; fixed, so it floats. */}
+        <WhatsAppFab />
       </body>
     </html>
   );

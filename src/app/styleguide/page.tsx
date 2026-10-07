@@ -61,10 +61,10 @@ export default function StyleguidePage() {
             </div>
             <div className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-4">
               <Badge tone="teal" dot>
-                48+ Ports
+                148 Global Ports
               </Badge>
               <Badge tone="neutral">24/7 Response</Badge>
-              <Badge tone="neutral">21 Ports</Badge>
+              <Badge tone="neutral">30 Countries</Badge>
             </div>
           </Container>
         </div>
@@ -178,7 +178,7 @@ export default function StyleguidePage() {
                   </p>
                   <p className="measure text-cream-200">
                     Mishk Overseas supplies vessels alongside and at anchorage
-                    across Indian and Gulf ports. Requisitions received by the
+                    at 148 ports worldwide. Requisitions received by the
                     24-hour desk are quoted within two hours, sourced against
                     IMPA codes, quality-checked on receipt, and delivered to the
                     vessel before departure.
@@ -293,7 +293,7 @@ export default function StyleguidePage() {
 
                 <Stage label="02 · Depth-sounding numerals">
                   <div className="grid grid-cols-2 gap-8">
-                    <DepthStat value={48} suffix="+" label="Ports served" />
+                    <DepthStat value={148} label="Global ports served" />
                     <DepthStat value={2} suffix="hr" label="Quote turnaround" />
                   </div>
                   <p className="mt-6 text-xs text-slate-400">
@@ -307,7 +307,7 @@ export default function StyleguidePage() {
                     <div className="relative p-6">
                       <p className="eyebrow text-brass-500">Ports we serve</p>
                       <p className="mt-2 font-display text-2xl">
-                        West coast, east coast &amp; the Gulf
+                        India, the Gulf &amp; 148 ports beyond
                       </p>
                     </div>
                   </div>
@@ -641,6 +641,10 @@ export default function StyleguidePage() {
                   [
                     "Footer",
                     "Four columns: company, supplies, services + company, offices. Chain divider above, compass rose watermark bottom-right.",
+                  ],
+                  [
+                    "Floating WhatsApp",
+                    "Fixed bottom-right at z-30, under the header and drawer. Brand green, so it is recognised at a glance. Label slides in on hover or keyboard focus, pointer devices only. Wrapped in a named <aside> — a fixed element belongs to no other landmark. Hidden in print.",
                   ],
                   [
                     "24×7 block",

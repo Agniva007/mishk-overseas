@@ -124,11 +124,15 @@ export function QuoteForm() {
               className={cn(err.port && "border-rust-500")}
             />
             <FieldError id={errId("port")} message={err.port} />
-            {/* Suggests our ports without restricting entry — buyers call at
-                ports we do not list, and the form must still accept them. */}
+            {/* Suggests all 148 ports without restricting entry — buyers call
+                at ports we do not list, and the form must still accept them.
+                The LOCODE and country disambiguate the repeated names
+                (Newcastle, Manzanillo) the global list brings with it. */}
             <datalist id={`${uid}-ports`}>
               {ports.map((p) => (
-                <option key={p.slug} value={p.name} />
+                <option key={p.slug} value={p.name}>
+                  {p.locode} · {p.country}
+                </option>
               ))}
             </datalist>
           </div>

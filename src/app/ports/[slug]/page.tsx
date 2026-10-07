@@ -11,17 +11,30 @@ import { PlimsollBullet } from "@/components/marine/plimsoll-bullet";
 import { ChartGrid } from "@/components/marine/chart-grid";
 import { HairlineRule } from "@/components/marine/hairline-rule";
 import { QuoteCTA } from "@/components/sections/quote-cta";
-import { coastLabels, coverageFor, ports } from "@/data/ports";
+import {
+  coverageFor,
+  detailPorts,
+  formatLat,
+  formatLng,
+  regionLabels,
+} from "@/data/ports";
 import { supplies } from "@/data/supplies";
 import { serviceGroups, servicesInGroup } from "@/data/services";
 import { spares } from "@/data/spares";
 import { site } from "@/data/site";
 
-const getPort = (slug: string) => ports.find((p) => p.slug === slug);
+/**
+ * Core ports only. Network ports are listed on /ports but have no page — see
+ * the tier note in `@/data/ports`. An unknown or network slug 404s.
+ */
+const getPort = (slug: string) => detailPorts.find((p) => p.slug === slug);
 
 export function generateStaticParams() {
-  return ports.map((p) => ({ slug: p.slug }));
+  return detailPorts.map((p) => ({ slug: p.slug }));
 }
+
+/** Nothing outside generateStaticParams resolves — no on-demand port pages. */
+export const dynamicParams = false;
 
 export async function generateMetadata({
   params,
@@ -46,7 +59,7 @@ export default async function PortPage({
   if (!port) notFound();
 
   const coverage = coverageFor(port);
-  const nearby = port.nearby
+  const nearby = (port.nearby ?? [])
     .map(getPort)
     .filter((p): p is NonNullable<typeof p> => Boolean(p));
 
@@ -89,7 +102,7 @@ export default async function PortPage({
           />
 
           <p className="eyebrow mb-4 text-brass-500">
-            {coastLabels[port.coast]} · Ship supply &amp; technical services
+            {regionLabels[port.region]} · Ship supply &amp; technical services
           </p>
           <div className="flex flex-wrap items-baseline gap-4">
             <h1 className="text-4xl lg:text-6xl">{port.name}</h1>
@@ -137,7 +150,7 @@ export default async function PortPage({
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {[
             { k: "UN/LOCODE", v: port.locode },
-            { k: "Coast", v: coastLabels[port.coast] },
+            { k: "Region", v: regionLabels[port.region] },
             { k: "Lead time", v: port.leadTime },
             {
               k: "Delivery",
@@ -146,8 +159,8 @@ export default async function PortPage({
                   .filter(Boolean)
                   .join(" · ") || "On request",
             },
-            { k: "Latitude", v: `${port.lat}° N` },
-            { k: "Longitude", v: `${port.lng}° E` },
+            { k: "Latitude", v: formatLat(port.lat) },
+            { k: "Longitude", v: formatLng(port.lng) },
             { k: "Supplies", v: coverage.supplies },
             { k: "Services", v: coverage.services },
           ].map((f, i) => (
